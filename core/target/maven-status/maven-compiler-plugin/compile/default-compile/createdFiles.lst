@@ -1,0 +1,4 @@
+com\newcolor\core\dao\UserDao.class
+com\newcolor\core\pojo\User.class
+com\newcolor\core\service\iml\UserServiceImpl.class
+com\newcolor\core\service\UserService.class

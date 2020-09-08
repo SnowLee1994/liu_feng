@@ -1,0 +1,3 @@
+com\newcolor\web\WebApplication.class
+com\newcolor\web\config\SwaggerConfig.class
+com\newcolor\web\controller\LoginController.class

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newcolor.core.dao.UserRoleDao">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into user_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="roleId != null">
+                role_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="roleId != null">
+                #{roleId},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteById" parameterType="int">
+		delete from user_role where
+		id=#{id}
+	</delete>
+
+    <delete id="deleteByUserAndRole" parameterType="int">
+		delete from user_role
+		where
+		user_id = #{userId}
+		and role_id = #{roleId}
+	</delete>
+
+</mapper>
