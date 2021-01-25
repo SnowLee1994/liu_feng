@@ -4,13 +4,15 @@ import com.newcolor.core.pojo.User;
 import com.newcolor.core.service.UserService;
 import com.newcolor.web.controller.login.dto.LoginDto;
 import com.newcolor.web.controller.user.dto.UserDto;
+import com.newcolor.web.controller.utils.JwtUtils;
 import com.newcolor.web.controller.utils.ResultData;
 import com.newcolor.web.controller.utils.ResultUtil;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author xuewen.li
@@ -23,6 +25,9 @@ public class LoginController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private JwtUtils jwtUtils;
 
     @ApiOperation(value="用户注册")
     @RequestMapping(value = "/regist",method = RequestMethod.POST)
@@ -51,10 +56,15 @@ public class LoginController {
 
     @ApiOperation(value="用户登录")
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public ResultData regist(LoginDto dto){
-        User login = userService.login(dto.getUserName(), dto.getPassword());
+    public ResultData regist(@RequestBody LoginDto dto){
+        User login = userService.login(dto.getEmail(), dto.getPassword());
         if (login != null){
-            return ResultUtil.success(login);
+            Map<String, Object> map = new HashMap<>();
+            String token = jwtUtils.createJwt(dto.getEmail(), dto.getPassword(),map);
+            Map<String, Object> returnMap = new HashMap<>();
+            returnMap.put("user",login);
+            returnMap.put("token",token);
+            return ResultUtil.success(returnMap);
         }else {
             return ResultUtil.error("用户名或密码错误!");
         }
