@@ -1,6 +1,8 @@
 package com.newcolor.core.service.iml;
 
-import com.newcolor.core.dao.UserDao;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.newcolor.core.dao.UserMapper;
 import com.newcolor.core.pojo.User;
 import com.newcolor.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,40 +19,47 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserDao userDao;
+    private UserMapper userMapper;
 
-    public User findById(Long id){
-        return userDao.findById(id);
+    public User findById(Integer id){
+        return userMapper.selectByPrimaryKey(id);
     }
 
     @Override
     public int insert(User user) {
-        return userDao.insert(user);
+        return userMapper.insert(user);
     }
 
     @Override
     public int update(User user) {
-        return userDao.update(user);
+        return userMapper.updateByPrimaryKeySelective(user);
     }
 
     @Override
-    public int deleteById(Long id) {
-        return userDao.deleteById(id);
+    public int deleteById(Integer id) {
+        return userMapper.deleteByPrimaryKey(id);
     }
 
     @Override
     public User findByName(String name) {
-        return userDao.findByName(name);
+        return userMapper.findByName(name);
     }
 
     @Override
     public User login(String userName, String password) {
-        return userDao.findByNameAndPwd(userName, password);
+        return userMapper.findByNameAndPwd(userName, password);
     }
 
     @Override
     public List<User> findUsers() {
-        return userDao.findUsers();
+        return userMapper.findUsers();
+    }
+
+    @Override
+    public PageInfo<User> findUsersByPages(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<User> lists = userMapper.findUsers();
+        return new PageInfo<User>(lists);
     }
 
 

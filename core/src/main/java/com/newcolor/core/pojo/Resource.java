@@ -1,19 +1,55 @@
 package com.newcolor.core.pojo;
 
-import lombok.Data;
-
 import java.util.Date;
 
-/**
- * @author xuewen.li
- * @date 2020/8/2317:53
- * @Description: 资源
- */
-@Data
 public class Resource {
+    private Integer id;
 
-    private Long id;
     private String name;
+
     private String url;
+
+    private String memo;
+
     private Date createdDate;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url == null ? null : url.trim();
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo == null ? null : memo.trim();
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
 }

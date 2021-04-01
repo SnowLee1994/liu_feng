@@ -1,6 +1,6 @@
 package com.newcolor.core.service.iml;
 
-import com.newcolor.core.dao.RoleDao;
+import com.newcolor.core.dao.RoleMapper;
 import com.newcolor.core.pojo.Role;
 import com.newcolor.core.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,35 +17,30 @@ import java.util.List;
 public class RoleServiceImpl implements RoleService {
 
     @Autowired
-    private RoleDao roleDao;
+    private RoleMapper roleMapper;
 
     @Override
     public int insert(Role role) {
-        return roleDao.insert(role);
+        return roleMapper.insert(role);
     }
 
     @Override
     public int update(Role role) {
-        return roleDao.update(role);
+        return roleMapper.updateByPrimaryKeySelective(role);
     }
 
     @Override
-    public int deleteById(Long id) {
-        return roleDao.deleteById(id);
+    public int deleteById(Integer id) {
+        return roleMapper.deleteByPrimaryKey(id);
     }
 
     @Override
-    public Role findById(Long id) {
-        return roleDao.findById(id);
-    }
-
-    @Override
-    public Role findByName(String name) {
-        return roleDao.findByName(name);
+    public Role findById(Integer id) {
+        return roleMapper.selectByPrimaryKey(id);
     }
 
     @Override
     public List<Role> findRoles() {
-        return roleDao.findRoles();
+        return roleMapper.selectAll();
     }
 }

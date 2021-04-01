@@ -12,6 +12,6 @@ import java.util.List;
 @Data
 public class BindRolesDto {
 
-    private Long userId;
-    private List<Long> roleIds;
+    private Integer userId;
+    private List<Integer> roleIds;
 }

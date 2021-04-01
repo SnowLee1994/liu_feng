@@ -56,7 +56,7 @@ public class RoleController {
 
     @ApiOperation(value="删除角色")
     @RequestMapping(value = "/delete/{id}",method= RequestMethod.POST)
-    public ResultData delRole(@PathVariable Long id){
+    public ResultData delRole(@PathVariable Integer id){
 
         int res = roleService.deleteById(id);
         if (res>0){

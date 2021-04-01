@@ -19,7 +19,7 @@ public class ResultUtil {
     }
 
     public static ResultData  success() {
-        return success(null);
+        return success("成功！");
     }
 
     public static ResultData error(String msg) {

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.newcolor.core.dao.ResourceMapper" >
+  <resultMap id="BaseResultMap" type="com.newcolor.core.pojo.Resource" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, url, memo, created_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from resource
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from resource
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.newcolor.core.pojo.Resource" >
+    insert into resource (id, name, url, 
+      memo, created_date)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{memo,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.newcolor.core.pojo.Resource" >
+    insert into resource
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="memo != null" >
+        memo,
+      </if>
+      <if test="createdDate != null" >
+        created_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.newcolor.core.pojo.Resource" >
+    update resource
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null" >
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.newcolor.core.pojo.Resource" >
+    update resource
+    set name = #{name,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
