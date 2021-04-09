@@ -1,6 +1,7 @@
 package com.newcolor.core.dao;
 
 import com.newcolor.core.pojo.User;
+import com.newcolor.core.pojo.UserRoles;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,4 +25,6 @@ public interface UserMapper {
     User findByNameAndPwd(String username,String password);
 
     List<User> findUsers();
+
+    UserRoles loadUserByUsername(String username);
 }

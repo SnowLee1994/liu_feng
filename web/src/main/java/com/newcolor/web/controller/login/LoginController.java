@@ -21,15 +21,11 @@ import java.util.Map;
  * @date 2020/6/2821:03
  * @Description: 用户登录
  */
-@RequestMapping("/test")
 @RestController
 public class LoginController {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private JwtUtils jwtUtils;
 
     @ApiOperation(value="用户注册")
     @RequestMapping(value = "/regist",method = RequestMethod.POST)
@@ -59,8 +55,7 @@ public class LoginController {
     public ResultData regist(LoginDto dto){
         User login = userService.login(dto.getUsername(), dto.getPassword());
         if (login != null){
-            Map<String, Object> map = new HashMap<>();
-            String token = jwtUtils.createJwt(dto.getUsername(), dto.getPassword(),map);
+            String token = JwtUtils.createJwtToken(dto.getUsername());
             Map<String, Object> returnMap = new HashMap<>();
             returnMap.put("user",login);
             returnMap.put("token",token);

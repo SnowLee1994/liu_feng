@@ -17,6 +17,16 @@
     from resource
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <resultMap id="Resource_Role_Info" type="com.newcolor.core.pojo.ResourceRoles">
+    <collection property="roles" select="com.newcolor.core.dao.RoleMapper.selectRoleByResource" column="id"
+                ofType="com.newcolor.core.pojo.Role" ></collection>
+  </resultMap>
+
+  <select id="getAllResourceInfo" resultMap="Resource_Role_Info">
+    select
+    <include refid="Base_Column_List"></include>
+    from resource
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from resource
     where id = #{id,jdbcType=INTEGER}

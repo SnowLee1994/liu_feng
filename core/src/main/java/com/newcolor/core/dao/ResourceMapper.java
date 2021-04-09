@@ -1,7 +1,10 @@
 package com.newcolor.core.dao;
 
 import com.newcolor.core.pojo.Resource;
+import com.newcolor.core.pojo.ResourceRoles;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface ResourceMapper {
@@ -16,4 +19,6 @@ public interface ResourceMapper {
     int updateByPrimaryKeySelective(Resource record);
 
     int updateByPrimaryKey(Resource record);
+
+    List<ResourceRoles> getAllResourceInfo();
 }
