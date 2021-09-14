@@ -1,5 +1,7 @@
 package com.newcolor.core.service.iml;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.newcolor.core.dao.RoleMapper;
 import com.newcolor.core.pojo.Role;
 import com.newcolor.core.service.RoleService;
@@ -42,5 +44,12 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public List<Role> findRoles() {
         return roleMapper.selectAll();
+    }
+
+    @Override
+    public PageInfo<Role> findRolesByPages(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Role> roles = roleMapper.selectAll();
+        return new PageInfo<Role>(roles);
     }
 }

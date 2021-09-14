@@ -1,8 +1,10 @@
 package com.newcolor.web.controller.role;
 
+import com.github.pagehelper.PageInfo;
 import com.newcolor.core.pojo.Role;
 import com.newcolor.core.service.RoleService;
 import com.newcolor.web.controller.role.dto.RoleDto;
+import com.newcolor.web.controller.utils.PageDto;
 import com.newcolor.web.controller.utils.ResultData;
 import com.newcolor.web.controller.utils.ResultUtil;
 import io.swagger.annotations.ApiOperation;
@@ -70,5 +72,13 @@ public class RoleController {
     public ResultData findRoles(){
         List<Role> roles = roleService.findRoles();
         return ResultUtil.success(roles);
+    }
+
+    @ApiOperation(value="角色列表分頁")
+    @RequestMapping(value = "/roleListByPage",method= RequestMethod.POST)
+    public ResultData findRolesByPage(PageDto pageDto){
+
+        PageInfo<Role> rolesByPages = roleService.findRolesByPages(pageDto.getPageNum(), pageDto.getPageSize());
+        return ResultUtil.success(rolesByPages);
     }
 }

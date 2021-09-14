@@ -1,5 +1,6 @@
 package com.newcolor.core.service;
 
+import com.github.pagehelper.PageInfo;
 import com.newcolor.core.pojo.Role;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface RoleService {
     Role findById(Integer id);
 
     List<Role> findRoles();
+
+    PageInfo<Role> findRolesByPages(Integer pageNum, Integer pageSize);
 }
