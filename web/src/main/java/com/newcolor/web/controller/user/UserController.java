@@ -66,7 +66,7 @@ public class UserController {
 
     @ApiOperation(value="删除用户")
     @RequestMapping(value = "/delete",method= RequestMethod.POST)
-    public ResultData editUser(Integer id){
+    public ResultData deleteUser(Integer id){
 
         int res = userService.deleteById(id);
         if (res>0){

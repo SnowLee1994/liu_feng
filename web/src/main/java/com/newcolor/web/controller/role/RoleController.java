@@ -9,7 +9,6 @@ import com.newcolor.web.controller.utils.ResultData;
 import com.newcolor.web.controller.utils.ResultUtil;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,6 +33,7 @@ public class RoleController {
         //转换
         Role role = new Role();
         role.setName(dto.getName());
+        role.setMemo(dto.getMemo());
         int insert = roleService.insert(role);
         if (insert>0){
             return ResultUtil.success();
@@ -48,6 +48,7 @@ public class RoleController {
         Role role = new Role();
         role.setId(dto.getId());
         role.setName(dto.getName());
+        role.setMemo(dto.getMemo());
 
         int res = roleService.update(role);
         if (res>0){
@@ -57,14 +58,21 @@ public class RoleController {
     }
 
     @ApiOperation(value="删除角色")
-    @RequestMapping(value = "/delete/{id}",method= RequestMethod.POST)
-    public ResultData delRole(@PathVariable Integer id){
+    @RequestMapping(value = "/delete",method= RequestMethod.POST)
+    public ResultData delRole(Integer id){
 
         int res = roleService.deleteById(id);
         if (res>0){
             return ResultUtil.success();
         }
         return ResultUtil.error("删除失败");
+    }
+
+    @ApiOperation(value="根据ID查询角色")
+    @RequestMapping(value = "/getRoleById",method= RequestMethod.POST)
+    public ResultData GetUser(Integer id){
+        Role role = roleService.findById(id);
+        return ResultUtil.success(role);
     }
 
     @ApiOperation(value="角色列表")
